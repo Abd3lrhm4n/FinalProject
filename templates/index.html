@@ -1,0 +1,43 @@
+{% extends "layout.html" %}
+
+{% block main %}
+    <form method="POST" action="/">
+        <div class="form-group">
+            <input class="form-control" id="password" type="password" name="password" placeholder="Password" />
+        </div>
+        <div class="form-group">
+            <ul class="focus">
+                <li class="invalid">Must be at least 8 characters long.</li>
+                <li class="invalid">Must contain a lowercase letter.</li>
+                <li class="invalid">Must contain an uppercase letter.</li>
+                <li class="invalid">Must contain a number.</li>
+                <li class="invalid">special character.</li>
+            </ul>
+        </div>
+        <button type="submit">Test</button>
+    </form>
+    <div id="time"></div>
+
+    <script src="../static/scripts/script.js"></script>
+    <script>
+        $("form").on("submit", function(){
+            // Stop form from submitting normally
+            event.preventDefault();
+
+            // Get some values from elements on the page:
+            var $form = $(this),
+                term = $form.find("input[name='password']").val(),
+                url = $form.attr("action");
+
+            // Send the data using post
+            var posting = $.post(url, { password: term });
+
+            posting.done(function(data){
+                console.log(data);
+                $("#time").empty().append(
+                    data.years +" Year " + data.months + " Months "+ data.weeks + " Weeks " + data.days + " Days " + data.hours + " Hours " + data.mintues + " Mintues " + data.seconds + " Seconds ");
+            });
+        });
+        
+    </script>
+{% endblock %}
