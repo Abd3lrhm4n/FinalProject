@@ -2,6 +2,7 @@ import os
 #import requests
 import json
 from bruteforce import SecondsToYears, TimeEstimateSec, Bruteforce
+from dictionary import LoadFile, DictSearchAlgo
 
 #from cs50 import SQL
 from flask import Flask, flash, jsonify, redirect, render_template, request, session
@@ -34,8 +35,19 @@ Session(app)
 def index():
 
     if request.method == "POST":
-        time = SecondsToYears(TimeEstimateSec(request.form.get("password")))
-        return jsonify(time)
+
+        if request.form.get("password"):
+
+            # calculate time to bruteforce  
+            time = SecondsToYears(TimeEstimateSec(request.form.get("password")))
+
+            # get the dictionary search result
+            dictionary = DictSearchAlgo(LoadFile(), request.form.get("password"))
+
+            return jsonify(time, dictionary)
+
+        else:
+            render_template("error.html")
 
     else:
         return render_template("index.html")

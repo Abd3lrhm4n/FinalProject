@@ -17,6 +17,7 @@
         <button type="submit">Test</button>
     </form>
     <div id="time"></div>
+    <div id="dictionary"></div>
 
     <script src="../static/scripts/script.js"></script>
     <script>
@@ -33,9 +34,19 @@
             var posting = $.post(url, { password: term });
 
             posting.done(function(data){
+                let m = "";
                 console.log(data);
+                data[1].matches.forEach(e => {
+                    m += ", " + e + " ";
+                });
                 $("#time").empty().append(
-                    data.years +" Year " + data.months + " Months "+ data.weeks + " Weeks " + data.days + " Days " + data.hours + " Hours " + data.mintues + " Mintues " + data.seconds + " Seconds ");
+                    data[0].years +" Year " + data[0].months + " Months "+ data[0].weeks + " Weeks " + data[0].days + " Days " + data[0].hours + " Hours " + data[0].mintues + " Mintues " + data[0].seconds + " Seconds ");
+            
+                $("#dictionary").empty().append(
+                    "Found Words in Your Password: " +
+                    m + "the percetage of found words in you password: " +
+                    data[1].percentage
+                );
             });
         });
         
