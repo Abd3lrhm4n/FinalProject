@@ -2,21 +2,15 @@ import io
 import os
 import glob
 import errno
+# from sys import argv
 
-def main():
+# def main():
 
-    # read dictionary file
-    # with open("large.txt", "r") as file:
-    #     data = file.read()
-    
-    # # load file data in list
-    # dictionary = data.split("\n")
+#     pw = argv[1]
 
-    # for x in range(10):
-    #     print(dictionary[x])
+#     DictSearchAlgo(LoadFile(), pw)
 
-    LoadFile()
-
+result = dict()
 
 def LoadFile():
 
@@ -30,26 +24,44 @@ def LoadFile():
     # read all txt in directory 
     for name in files:
         try:
-            with open(name) as f:
+            with open(name, "r") as f:
                 for line in f:
-                    dictionary.append((line.split()))
+                    dictionary.append(line.replace("\n", ''))
 
-        except IOError as exc:  # Not sure what error this is
+        # Not sure what error this is
+        except IOError as exc:  
             if exc.errno != errno.EISDIR:
                 raise
 
     return dictionary
 
 
+def DictSearchAlgo(Dict, pw):
+
+    # hold the password value
+    password = pw
+
+    # matches words list
+    matches = list()
+
+    for w in Dict:
+        if password.find(str(w)) != -1:
+            
+            # remove the matches words from the password
+            password = password.replace(str(w), '')
+
+            # add the match word in the list
+            matches.append(w)
+
+    # calculate the percentage of the words in the password
+    percentage = round(((len(password) / len(pw) * 100) - 100) * -1, 2)
+
+    # store results data
+    result = {"matches": matches, "percentage": percentage}
+
+    return result
 
 
 
-
-
-
-
-
-
-
-if __name__ == "__main__":
-    main()
+# if __name__ == "__main__":
+#     main()
