@@ -2,22 +2,23 @@ import io
 import os
 import glob
 import errno
-# from sys import argv
+from sys import argv
+import marisa_trie
 
 # def main():
 
 #     pw = argv[1]
 
-#     DictSearchAlgo(LoadFile(), pw)
+#     DictSearchAlgo(LoadFile('data/dictionary/*.marisa'), pw)
 
 result = dict()
 
-def LoadFile():
+trie = marisa_trie.Trie()
 
-    source = 'data/dictionary/*.txt'
 
-    # list of data
-    dictionary = list()
+def LoadFile(dirPath):
+
+    source = dirPath
 
     files = glob.glob(source)
 
@@ -25,15 +26,14 @@ def LoadFile():
     for name in files:
         try:
             with open(name, "r") as f:
-                for line in f:
-                    dictionary.append(line.replace("\n", ''))
+                trie.read(f)
 
         # Not sure what error this is
         except IOError as exc:  
             if exc.errno != errno.EISDIR:
                 raise
 
-    return dictionary
+    return trie
 
 
 def DictSearchAlgo(Dict, pw):
@@ -44,14 +44,20 @@ def DictSearchAlgo(Dict, pw):
     # matches words list
     matches = list()
 
-    for w in Dict:
-        if password.find(str(w)) != -1:
-            
-            # remove the matches words from the password
-            password = password.replace(str(w), '')
+    isChecked = False
 
-            # add the match word in the list
+    while isChecked == False: 
+
+        r = trie.prefixes(password)
+
+        if len(r) > 0:
+
+            w = max(r, key=len)
             matches.append(w)
+            password = password.replace(w, '', 1)
+
+        else:
+            isChecked = True
 
     # calculate the percentage of the words in the password
     percentage = round(((len(password) / len(pw) * 100) - 100) * -1, 2)
