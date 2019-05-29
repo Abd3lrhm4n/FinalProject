@@ -42,7 +42,8 @@ def index():
             time = SecondsToYears(TimeEstimateSec(request.form.get("password")))
 
             # get the dictionary search result
-            dictionary = DictSearchAlgo(LoadFile(), request.form.get("password"))
+            dictionary = DictSearchAlgo(
+                LoadFile("data/dictionary/*.marisa"), request.form.get("password"))
 
             return jsonify(time, dictionary)
 

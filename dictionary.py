@@ -48,16 +48,18 @@ def DictSearchAlgo(Dict, pw):
 
     while isChecked == False: 
 
-        r = trie.prefixes(password)
+        for i in range(len(password)):
 
-        if len(r) > 0:
+            r = trie.prefixes(password[i:])
 
-            w = max(r, key=len)
-            matches.append(w)
-            password = password.replace(w, '', 1)
+            if len(r) > 0:
 
-        else:
-            isChecked = True
+                w = max(r, key=len)
+                matches.append(w)
+                password = password.replace(w, '', 1)
+
+           
+        isChecked = True
 
     # calculate the percentage of the words in the password
     percentage = round(((len(password) / len(pw) * 100) - 100) * -1, 2)
