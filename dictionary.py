@@ -44,21 +44,37 @@ def DictSearchAlgo(Dict, pw):
     # matches words list
     matches = list()
 
+    # check if the password checked
     isChecked = False
 
     while isChecked == False: 
 
-        for i in range(len(password)):
+        i = 0
 
+        # loop in every char in password
+        while i < len(password):
+
+            # get the similair from the trie
             r = trie.prefixes(password[i:])
 
+            i += 1
+
+            # if result
             if len(r) > 0:
 
+                # take the longest word
                 w = max(r, key=len)
+
+                # add it to matches list
                 matches.append(w)
+
+                # remove it from the password
                 password = password.replace(w, '', 1)
 
-           
+                # loop over again from the began
+                i = 0
+
+        # break while loop
         isChecked = True
 
     # calculate the percentage of the words in the password
