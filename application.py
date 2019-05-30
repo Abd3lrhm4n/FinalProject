@@ -38,14 +38,19 @@ def index():
 
         if request.form.get("password"):
 
+            password = request.form.get("password")
+
             # calculate time to bruteforce  
-            time = SecondsToYears(TimeEstimateSec(request.form.get("password")))
+            time = SecondsToYears(TimeEstimateSec(password))
 
             # get the dictionary search result
             dictionary = DictSearchAlgo(
-                LoadFile("data/dictionary/*.marisa"), request.form.get("password"))
+                LoadFile("data/dictionary/*.marisa"), password)
 
-            return jsonify(time, dictionary)
+            # get common passwords words in password
+            common = DictSearchAlgo(LoadFile("data/common/*.marisa"), password)
+
+            return jsonify(time, dictionary, common)
 
         else:
             render_template("error.html")
