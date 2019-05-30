@@ -18,6 +18,7 @@
     </form>
     <div id="time"></div>
     <div id="dictionary"></div>
+    <div id="common"></div>
 
     <script src="../static/scripts/script.js"></script>
     <script>
@@ -35,9 +36,14 @@
 
             posting.done(function(data){
                 let m = "";
+                let c = "";
                 console.log(data);
                 data[1].matches.forEach(e => {
                     m += ", " + e + " ";
+
+                data[2].matches.forEach(e => {
+                    c += ", " + e + " ";
+                })
                 });
                 $("#time").empty().append(
                     data[0].years +" Year " + data[0].months + " Months "+ data[0].weeks + " Weeks " + data[0].days + " Days " + data[0].hours + " Hours " + data[0].mintues + " Mintues " + data[0].seconds + " Seconds ");
@@ -46,6 +52,12 @@
                     "Found Words in Your Password: " +
                     m + "the percetage of found words in you password: " +
                     data[1].percentage
+                );
+
+                $("#common").empty().append(
+                    "Found Words in Your Password: " + 
+                    c + "the percetage of found words in you password: " +
+                    data[2].percentage
                 );
             });
         });
