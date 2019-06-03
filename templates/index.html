@@ -87,6 +87,11 @@
             // Stop form from submitting normally
             event.preventDefault();
 
+            //clear old results
+            $("#dictionary").empty();
+            $("#common").empty();
+            $("#info").empty();
+
             // Get some values from elements on the page:
             var $form = $(this),
                 term = $form.find("input[name='password']").val(),
