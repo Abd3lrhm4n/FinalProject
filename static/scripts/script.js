@@ -67,6 +67,11 @@ $('document').ready(function(){
         $("ul").removeClass("focus");
     });
 
+    $("input[name=info]").on("change", function() {
+        
+        $(".userInfo").toggle("slow", "linear");
+    });
+
 });
 
 
