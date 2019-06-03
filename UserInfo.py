@@ -1,7 +1,7 @@
 
 
-def main():
-    UserInfoAnalysis('AbdelmoneamMokhtar', "AbdoMokhtar")
+# def main():
+#     UserInfoAnalysis('AbdelmoneamMokhtar', "AbdoMokhtar")
 
 
 
@@ -69,5 +69,5 @@ def UserInfoAnalysis(info, pw):
 
 
 
-if __name__ == "__main__":
-    main()
+# if __name__ == "__main__":
+#     main()

@@ -3,6 +3,7 @@ import os
 import json
 from bruteforce import SecondsToYears, TimeEstimateSec, Bruteforce
 from dictionary import LoadFile, DictSearchAlgo
+from UserInfo import UserInfoAnalysis
 
 #from cs50 import SQL
 from flask import Flask, flash, jsonify, redirect, render_template, request, session
@@ -36,6 +37,11 @@ def index():
 
     if request.method == "POST":
 
+        userInfo = dict()
+        common = dict()
+        dictionary = dict()
+        time = ""
+
         if request.form.get("password"):
 
             password = request.form.get("password")
@@ -43,14 +49,44 @@ def index():
             # calculate time to bruteforce  
             time = SecondsToYears(TimeEstimateSec(password))
 
-            # get the dictionary search result
-            dictionary = DictSearchAlgo(
-                LoadFile("data/dictionary/*.marisa"), password)
+            if request.form.get("dictionary"):
+                    
+                # get the dictionary search result
+                dictionary = DictSearchAlgo(
+                    LoadFile("data/dictionary/*.marisa"), password)
 
-            # get common passwords words in password
-            common = DictSearchAlgo(LoadFile("data/common/*.marisa"), password)
+            if request.form.get("common"):
 
-            return jsonify(time, dictionary, common)
+                # get common passwords words in password
+                common = DictSearchAlgo(LoadFile("data/common/*.marisa"), password)
+
+            if request.form.get("info"):
+                    
+                if request.form.get("fullname"):
+
+                    userInfo["fullname"] = UserInfoAnalysis(request.form.get("fullname"), password)
+
+                if request.form.get("petname"):
+
+                    userInfo["petname"] = UserInfoAnalysis(request.form.get("petname"), password)
+
+                if request.form.get("birthday"):
+
+                    userInfo["birthday"] = UserInfoAnalysis(request.form.get("birthday"), password)
+
+                if request.form.get("lovename"):
+
+                    userInfo["lovename"] = UserInfoAnalysis(request.form.get("lovename"), password)
+    
+                if request.form.get("sport"):
+
+                    userInfo["sport"] = UserInfoAnalysis(request.form.get("sport"), password)
+
+                if request.form.get("team"):
+
+                    userInfo["team"] = UserInfoAnalysis(request.form.get("team"), password)
+ 
+            return jsonify(time, dictionary, common, userInfo)
 
         else:
             render_template("error.html")

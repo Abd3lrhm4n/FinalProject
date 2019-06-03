@@ -2,7 +2,7 @@
 
 {% block main %}
     <form method="POST" action="/">
-        <div class="form-group">
+        <div class="form-group password">
             <input class="form-control" id="password" type="password" name="password" placeholder="Password" />
         </div>
         <div class="form-group">
@@ -15,44 +15,71 @@
             </ul>
         </div>
 
-        <div class="form-group">
-            <div class="row">
-                <div class="col">
-                    <input class="form-control" type="text" name="fullname" placeholder="Full Name"/>
+        <div class="custom-control switches-container">
+            <div class="switch-contain">
+                <label class="switch">
+                    <input type="checkbox" name="dictionary">
+                    <span class="slider round"></span>
+                </label>
+                <label class="check-desc">English Dictionary</label>
+            </div>
+
+            <div class="switch-contain">
+                <label class="switch">
+                    <input type="checkbox" name="common">
+                    <span class="slider round"></span>
+                </label>
+                <label class="check-desc">Common Password</label>
+            </div>
+
+            <div class="switch-contain">
+                <label class="switch">
+                    <input type="checkbox" name="info">
+                    <span class="slider round"></span>
+                </label>
+                <label class="check-desc">Personal Info</label>
+            </div>
+        </div>
+        <div class="userInfo">
+            <div class="form-group">
+                <div class="row">
+                    <div class="col">
+                        <input class="form-control" type="text" name="fullname" placeholder="Full Name"/>
+                    </div>
+                    <div class="col">
+                        <input class="form-control" type="text" name="petname" placeholder="Pet Name" />
+                    </div>
                 </div>
-                <div class="col">
-                    <input class="form-control" type="text" name="petname" placeholder="Pet Name" />
+            </div>
+
+            <div class="form-group">
+                <div class="row">
+                    <div class="col">
+                        <input class="form-control" type="text" name="birthday" placeholder="Birthday" />
+                    </div>
+                    <div class="col">
+                        <input class="form-control" type="text" name="lovename" placeholder="Love Name" />
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="row">
+                    <div class="col">
+                        <input class="form-control" type="text" name="sport" placeholder="Favorite Sport" />
+                    </div>
+                    <div class="col">
+                        <input class="form-control" type="text" name="team" placeholder="Favorite Team" />
+                    </div>
                 </div>
             </div>
         </div>
-
-        <div class="form-group">
-            <div class="row">
-                <div class="col">
-                    <input class="form-control" type="text" name="birthday" placeholder="Birthday" />
-                </div>
-                <div class="col">
-                    <input class="form-control" type="text" name="lovename" placeholder="Love Name" />
-                </div>
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="row">
-                <div class="col">
-                    <input class="form-control" type="text" name="sport" placeholder="Favorite Sport" />
-                </div>
-                <div class="col">
-                    <input class="form-control" type="text" name="team" placeholder="Favorite Team" />
-                </div>
-            </div>
-        </div>
-
-        <button type="submit">Test</button>
+        <button class="btn btn-info btn-md" type="submit">Test</button>
     </form>
     <div id="time"></div>
     <div id="dictionary"></div>
     <div id="common"></div>
+    <div id="info"></div>
 
     <script src="../static/scripts/script.js"></script>
     <script>
@@ -63,36 +90,60 @@
             // Get some values from elements on the page:
             var $form = $(this),
                 term = $form.find("input[name='password']").val(),
+
                 url = $form.attr("action");
 
             // Send the data using post
-            var posting = $.post(url, { password: term });
+            var posting = $.post(url, $(this).serialize());
 
             posting.done(function(data){
                 let m = "";
                 let c = "";
+                let u = "";
                 console.log(data);
-                data[1].matches.forEach(e => {
-                    m += ", " + e + " ";
+                console.log(Object.keys(data[1]).length)
+                if (Object.keys(data[1]).length) {
+                    data[1].matches.forEach(e => {
+                        m += ", " + e + " ";
+                    });
+                }
 
-                data[2].matches.forEach(e => {
-                    c += ", " + e + " ";
-                })
-                });
+                if (Object.keys(data[2]).length) {
+                    data[2].matches.forEach(e => {
+                        c += ", " + e + " ";
+                    });   
+                }
+                console.log(c.length)
                 $("#time").empty().append(
                     data[0].years +" Year " + data[0].months + " Months "+ data[0].weeks + " Weeks " + data[0].days + " Days " + data[0].hours + " Hours " + data[0].mintues + " Mintues " + data[0].seconds + " Seconds ");
             
-                $("#dictionary").empty().append(
-                    "Found Words in Your Password: " +
-                    m + "the percetage of found words in you password: " +
-                    data[1].percentage
-                );
-
-                $("#common").empty().append(
-                    "Found Words in Your Password: " + 
-                    c + "the percetage of found words in you password: " +
-                    data[2].percentage
-                );
+                if (m != "") {
+                    $("#dictionary").empty().append(
+                        "Found Words in Your Password: " +
+                        m + "the percetage of found words in you password: " +
+                        data[1].percentage
+                    );
+                }
+                
+                if (c != "") {
+                    $("#common").empty().append(
+                        "Found Words in Your Password: " +
+                        c + "the percetage of found words in you password: " +
+                        data[2].percentage
+                    );
+                }
+                
+                if (Object.keys(data[3]).length) {
+                    $("#info").empty().append(
+                        "Full Name: " + data[3].fullname + "| " +
+                        "Pet Name: " + data[3].petname + "| " +
+                        "Love Name: " + data[3].lovename + "| " +
+                        "Sport: " + data[3].sport + "| " +
+                        "Favoite Team: " + data[3].team + "| " +
+                        "Birthday: " + data[3].birthday
+                    );
+                }
+                
             });
         });
         
