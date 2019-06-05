@@ -77,18 +77,24 @@
         <button class="btn btn-info btn-md" type="submit">Test</button>
     </form>
     <div id="time"></div>
-    <div id="dictionary"></div>
-    <div id="common"></div>
+    <div id="dictionary">
+        <canvas id="dict-chart"></canvas>
+
+    </div>
+    <div id="common">
+        <!-- <canvas id="common-chart"></canvas> -->
+    </div>
     <div id="info"></div>
 
     <script src="../static/scripts/script.js"></script>
     <script>
+        
         $("form").on("submit", function(){
             // Stop form from submitting normally
             event.preventDefault();
 
             //clear old results
-            $("#dictionary").empty();
+            // $("#dictionary").empty();
             $("#common").empty();
             $("#info").empty();
 
@@ -123,11 +129,22 @@
                     data[0].years +" Year " + data[0].months + " Months "+ data[0].weeks + " Weeks " + data[0].days + " Days " + data[0].hours + " Hours " + data[0].mintues + " Mintues " + data[0].seconds + " Seconds ");
             
                 if (m != "") {
-                    $("#dictionary").empty().append(
-                        "Found Words in Your Password: " +
-                        m + "the percetage of found words in you password: " +
-                        data[1].percentage
-                    );
+                    var ctx = document.getElementById('dict-chart').getContext('2d');
+                    var chart = new Chart(ctx, {
+                        // The type of chart we want to create
+                        type: 'pie',
+
+                        // The data for our dataset
+                        data: {
+                            labels: ['percentage', 'total'],
+                            datasets: [{
+                                label: 'My First dataset',
+                                backgroundColor: ['rgb(255, 99, 132)', 'rgb(10, 100, 132)'],
+                                borderColor: 'rgb(255, 99, 132)',
+                                data: [data[1].percentage, 100 - data[1].percentage]
+                            }]
+                        }
+                    });
                 }
                 
                 if (c != "") {
@@ -148,6 +165,25 @@
                         "Birthday: " + data[3].birthday
                     );
                 }
+
+
+
+                // var ctx1 = document.getElementById('common-chart').getContext('2d');
+                // var chart = new Chart(ctx1, {
+                //     // The type of chart we want to create
+                //     type: 'pie',
+
+                //     // The data for our dataset
+                //     data: {
+                //         labels: ['percentage', 'total'],
+                //         datasets: [{
+                //             label: 'My First dataset',
+                //             backgroundColor: ['rgb(255, 99, 132)', 'rgb(10, 100, 132)'],
+                //             borderColor: 'rgb(255, 99, 132)',
+                //             data: [data[2].percentage, 100 - data[2].percentage]
+                //         }]
+                //     }
+                // });
                 
             });
         });
