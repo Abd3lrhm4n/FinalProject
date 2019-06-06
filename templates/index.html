@@ -76,16 +76,19 @@
         </div>
         <button class="btn btn-info btn-md" type="submit">Test</button>
     </form>
-    <div id="time"></div>
-    <div id="dictionary">
-        <canvas id="dict-chart"></canvas>
+    <div class="container">
+        <div class="row">
+            <div id="time" class="col-sm"></div>
+            <div id="dictionary" class="col-sm">
+                <canvas id="dict-chart"></canvas>
 
+            </div>
+            <div id="common" class="col-sm">
+                <canvas id="common-chart"></canvas>
+            </div>
+            <div id="info" class="col-sm"></div>
+        </div>
     </div>
-    <div id="common">
-        <!-- <canvas id="common-chart"></canvas> -->
-    </div>
-    <div id="info"></div>
-
     <script src="../static/scripts/script.js"></script>
     <script>
         
@@ -94,8 +97,6 @@
             event.preventDefault();
 
             //clear old results
-            // $("#dictionary").empty();
-            $("#common").empty();
             $("#info").empty();
 
             // Get some values from elements on the page:
@@ -111,17 +112,22 @@
                 let m = "";
                 let c = "";
                 let u = "";
+                let dictArray = [];
+                let comArray = [];
+
                 console.log(data);
                 console.log(Object.keys(data[1]).length)
                 if (Object.keys(data[1]).length) {
                     data[1].matches.forEach(e => {
                         m += ", " + e + " ";
+                        dictArray.push(e);
                     });
                 }
 
                 if (Object.keys(data[2]).length) {
                     data[2].matches.forEach(e => {
                         c += ", " + e + " ";
+                        comArray.push(e);
                     });   
                 }
                 console.log(c.length)
@@ -145,14 +151,31 @@
                             }]
                         }
                     });
+                    for (let i = 0; i < dictArray.length; i++) {
+                        $("#dictionary").append("<p>"+ dictArray[i] +"</p>")
+                    }
                 }
                 
                 if (c != "") {
-                    $("#common").empty().append(
-                        "Found Words in Your Password: " +
-                        c + "the percetage of found words in you password: " +
-                        data[2].percentage
-                    );
+                    var ctx1 = document.getElementById('common-chart').getContext('2d');
+                    var chart = new Chart(ctx1, {
+                        // The type of chart we want to create
+                        type: 'pie',
+
+                        // The data for our dataset
+                        data: {
+                            labels: ['percentage', 'total'],
+                            datasets: [{
+                                label: 'My First dataset',
+                                backgroundColor: ['rgb(255, 99, 132)', 'rgb(10, 100, 132)'],
+                                borderColor: 'rgb(255, 99, 132)',
+                                data: [data[2].percentage, 100 - data[2].percentage]
+                            }]
+                        }
+                    });
+                    for (let i = 0; i < comArray.length; i++) {
+                        $("#common").append("<p>" + comArray[i] + "</p>")
+                    }
                 }
                 
                 if (Object.keys(data[3]).length) {
@@ -166,24 +189,6 @@
                     );
                 }
 
-
-
-                // var ctx1 = document.getElementById('common-chart').getContext('2d');
-                // var chart = new Chart(ctx1, {
-                //     // The type of chart we want to create
-                //     type: 'pie',
-
-                //     // The data for our dataset
-                //     data: {
-                //         labels: ['percentage', 'total'],
-                //         datasets: [{
-                //             label: 'My First dataset',
-                //             backgroundColor: ['rgb(255, 99, 132)', 'rgb(10, 100, 132)'],
-                //             borderColor: 'rgb(255, 99, 132)',
-                //             data: [data[2].percentage, 100 - data[2].percentage]
-                //         }]
-                //     }
-                // });
                 
             });
         });

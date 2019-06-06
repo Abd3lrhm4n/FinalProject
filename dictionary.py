@@ -60,7 +60,7 @@ def DictSearchAlgo(Dict, pw):
             i += 1
 
             # if result
-            if len(r) > 0:
+            if len(r) > 0 and not (len(r) < 2 and r[0] == ''):
 
                 # take the longest word
                 w = max(r, key=len)
