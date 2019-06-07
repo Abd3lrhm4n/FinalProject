@@ -76,17 +76,23 @@
         </div>
         <button class="btn btn-info btn-md" type="submit">Test</button>
     </form>
+    <div id="time" class="col-sm"></div>
     <div class="container">
         <div class="row">
-            <div id="time" class="col-sm"></div>
             <div id="dictionary" class="col-sm">
                 <canvas id="dict-chart"></canvas>
-
             </div>
             <div id="common" class="col-sm">
                 <canvas id="common-chart"></canvas>
             </div>
-            <div id="info" class="col-sm"></div>
+        </div>
+    </div>
+    <div class="contianer">
+        <div class="row">
+            <div id="info" class="col-sm">
+                <canvas id="info-chart"></canvas>
+            </div>
+            <div id="data-info" class="col-sm"></div>
         </div>
     </div>
     <script src="../static/scripts/script.js"></script>
@@ -95,9 +101,6 @@
         $("form").on("submit", function(){
             // Stop form from submitting normally
             event.preventDefault();
-
-            //clear old results
-            $("#info").empty();
 
             // Get some values from elements on the page:
             var $form = $(this),
@@ -211,16 +214,43 @@
                         }
                     });
                 }
-                
+
+                let passlen = $("#password").val().length;
+                let pass = $("#password").val();
+                console.log("fullname= " + data[3].fullname.length);
+
                 if (Object.keys(data[3]).length) {
-                    $("#info").empty().append(
-                        "Full Name: " + data[3].fullname + "| " +
-                        "Pet Name: " + data[3].petname + "| " +
-                        "Love Name: " + data[3].lovename + "| " +
-                        "Sport: " + data[3].sport + "| " +
-                        "Favoite Team: " + data[3].team + "| " +
-                        "Birthday: " + data[3].birthday
-                    );
+                    var ctx2 = document.getElementById('info-chart').getContext('2d');
+                    var chart = new Chart(ctx2, {
+                        // The type of chart we want to create
+                        type: 'pie',
+
+                        // The data for our dataset
+                        data: {
+                            labels: ['Full Name', 'Pet Name', 'Love Name', 'Favorite Sport', 'Favorite Team', 'Birthday', 'total'],
+                            datasets: [{
+                                label: 'My First dataset',
+                                backgroundColor: ['rgb(255, 99, 132)', 'rgb(10, 100, 132)', 'rgb(10, 155, 12)', 'rgb(105, 150, 152)', 'rgb(103, 100, 130)', 'rgb(105, 160, 132)'],
+                                borderColor: 'rgb(255, 99, 132)',
+                                data: [data[3].fullname.length / passlen * 100, 
+                                data[3].petname.length / passlen * 100,
+                                data[3].lovename.length / passlen * 100,
+                                data[3].sport.length / passlen  * 100,
+                                data[3].team.length / passlen * 100,
+                                data[3].birthday.length / passlen * 100,
+                                data[3].fullname.length + data[3].petname.length + data[3].lovename.length + data[3].sport.length + data[3].team.length + data[3].birthday.length - 100
+                            ]
+                            }]
+                        }
+                    });
+                    $("#data-info").append(
+                        "<p class='infoWords'> <span> Full Name </span>" + data[3].fullname + "</p>" +
+                        "<p class='infoWords'> <span> Pet Name </span>" + data[3].petname + "</p>" +
+                        "<p class='infoWords'> <span> Love Name </span>" + data[3].lovename + "</p>" +
+                        "<p class='infoWords'> <span> Favortie Sport </span>" + data[3].sport + "</p>" +
+                        "<p class='infoWords'> <span> Favorite Team </span>" + data[3].team + "</p>" +
+                        "<p class='infoWords'> <span> Birthday </span>" + data[3].birthday + "</p>"
+                    )
                 }
 
                 

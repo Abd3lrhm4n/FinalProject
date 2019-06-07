@@ -128,3 +128,11 @@ input:checked + .slider:before {
 .row {
   text-align: center;
 }
+
+.infoWords {
+  display: block !important;
+}
+
+.infoWords span {
+  font-weight: 700;
+}
