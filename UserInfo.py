@@ -63,9 +63,11 @@ def UserInfoAnalysis(info, pw):
                 found.append(word)
 
             break
-
-    return max(found, key=len)
-
+        
+    if len(found):  
+        return max(found, key=len)
+    else:
+        return ''
 
 
 
