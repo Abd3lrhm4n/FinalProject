@@ -66,26 +66,50 @@ def index():
 
                     userInfo["fullname"] = UserInfoAnalysis(request.form.get("fullname"), password)
 
+                else:
+
+                    userInfo["fullname"] = ""
+
                 if request.form.get("petname"):
 
                     userInfo["petname"] = UserInfoAnalysis(request.form.get("petname"), password)
+
+                else:
+
+                    userInfo["petname"] = ""
 
                 if request.form.get("birthday"):
 
                     userInfo["birthday"] = UserInfoAnalysis(request.form.get("birthday"), password)
 
+                else:
+
+                    userInfo["birthday"] = ""
+
                 if request.form.get("lovename"):
 
                     userInfo["lovename"] = UserInfoAnalysis(request.form.get("lovename"), password)
+
+                else:
+
+                    userInfo["lovename"] = ""
     
                 if request.form.get("sport"):
 
                     userInfo["sport"] = UserInfoAnalysis(request.form.get("sport"), password)
 
+                else:
+
+                    userInfo["sport"] = ""
+
                 if request.form.get("team"):
 
                     userInfo["team"] = UserInfoAnalysis(request.form.get("team"), password)
  
+                else:
+
+                    userInfo["team"] = ""
+
             return jsonify(time, dictionary, common, userInfo)
 
         else:
