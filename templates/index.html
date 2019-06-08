@@ -5,7 +5,7 @@
         <div class="form-group password">
             <input class="form-control" id="password" type="password" name="password" placeholder="Password" />
         </div>
-        <div class="form-group">
+        <!-- <div class="form-group">
             <ul class="focus">
                 <li class="invalid">Must be at least 8 characters long.</li>
                 <li class="invalid">Must contain a lowercase letter.</li>
@@ -13,7 +13,7 @@
                 <li class="invalid">Must contain a number.</li>
                 <li class="invalid">special character.</li>
             </ul>
-        </div>
+        </div> -->
 
         <div class="custom-control switches-container">
             <div class="switch-contain">
@@ -164,6 +164,8 @@
                 $("#data-info").empty();
                 $(".bruteResult p:nth-child(2)").empty();
                 $(".time").css("display", "none");
+                $("#dict-chart").empty();
+                $("#common-chart").empty();
 
                 console.log(data);
                 if (Object.keys(data[1]).length) {
@@ -172,7 +174,7 @@
                         dictArray.push(e);
                     });
                 }
-
+                console.log("m" + m.length);
                 if (Object.keys(data[2]).length) {
                     data[2].matches.forEach(e => {
                         c += ", " + e + " ";
@@ -232,7 +234,7 @@
                     console.log(timeArr[i]);
                     $(".bruteResult p:nth-child(2)")[i].append(timeArr[i]);
                 }
-                if (m != "") {
+                if ($(".switch input[name=dictionary]").is(":checked")) {
                     var ctx = document.getElementById('dict-chart').getContext('2d');
                     var chart = new Chart(ctx, {
                         // The type of chart we want to create
@@ -252,26 +254,9 @@
                     for (let i = 0; i < dictArray.length; i++) {
                         $("#dictionary").append("<p class='w'>"+ dictArray[i] +"</p>")
                     }
-                }else {
-                    var ctx = document.getElementById('dict-chart').getContext('2d');
-                    var chart = new Chart(ctx, {
-                        // The type of chart we want to create
-                        type: 'pie',
-
-                        // The data for our dataset
-                        data: {
-                            labels: ['percentage', 'total'],
-                            datasets: [{
-                                label: 'My First dataset',
-                                backgroundColor: ['rgb(255, 99, 132)', 'rgb(10, 100, 132)'],
-                                borderColor: 'rgb(10, 100, 132)',
-                                data: [0, 100]
-                            }]
-                        }
-                    });
                 }
                 
-                if (c != "") {
+                if ($(".switch input[name=common]").is(":checked")) {
                     var ctx1 = document.getElementById('common-chart').getContext('2d');
                     var chart = new Chart(ctx1, {
                         // The type of chart we want to create
@@ -291,23 +276,6 @@
                     for (let i = 0; i < comArray.length; i++) {
                         $("#common").append("<p class='w'>" + comArray[i] + "</p>")
                     }
-                }else {
-                    var ctx1 = document.getElementById('common-chart').getContext('2d');
-                    var chart = new Chart(ctx1, {
-                        // The type of chart we want to create
-                        type: 'pie',
-
-                        // The data for our dataset
-                        data: {
-                            labels: ['percentage', 'total'],
-                            datasets: [{
-                                label: 'My First dataset',
-                                backgroundColor: ['rgb(255, 99, 132)', 'rgb(10, 100, 132)'],
-                                borderColor: 'rgb(10, 100, 132)',
-                                data: [0, 100]
-                            }]
-                        }
-                    });
                 }
 
                 let passlen = $("#password").val().length;

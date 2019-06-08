@@ -1,7 +1,19 @@
 $('document').ready(function(){
     
     $("#password").focus();
-    $(".time").css("display", "none")
+    $(".time").css("display", "none");
+
+    //$('#password').togglePassword();
+
+    // Configure MinSize -- default is 5
+    PasswordValidator.minSize = 8;
+    // Configure MaxSize -- default is 15
+    PasswordValidator.maxSize = 16;
+
+    // whether you want to validate on prohibited characters    
+    PasswordValidator.prohibitedConfigured = false;
+
+    PasswordValidator.setup('password');
 
     $("#password").on("keyup", function(){
 
@@ -60,31 +72,17 @@ $('document').ready(function(){
 
     });
 
-    $("#password").on("focus", function(){
-        $("ul").addClass('focus');
-    });
+    // $("#password").on("focus", function(){
+    //     $("ul").addClass('focus');
+    // });
 
-    $("#password").on("focusout", function(){
-        $("ul").removeClass("focus");
-    });
+    // $("#password").on("focusout", function(){
+    //     $("ul").removeClass("focus");
+    // });
 
     $("input[name=info]").on("change", function() {
         
         $(".userInfo").toggle("slow", "linear");
-    });
-
-    $(".GaugeMeter").gaugeMeter({
-        percent : 80,
-        text : "Bruteforce Time",
-        text_size : 0.22,
-        //append : "Years",
-        prepend: null,
-        size : "500",
-        width : 15,
-        style : "Arch",
-        theme : "Red-Gold-Green",
-        animate_gauge_colors : false,
-        animate_text_colors : false
     });
 
 });
