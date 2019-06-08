@@ -118,6 +118,10 @@
                 let dictArray = [];
                 let comArray = [];
 
+                $("#dictionary p").remove();
+                $("#common p").remove();
+                $("#data-info").empty();
+
                 console.log(data);
                 console.log(Object.keys(data[1]).length)
                 if (Object.keys(data[1]).length) {
