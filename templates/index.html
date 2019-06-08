@@ -76,7 +76,48 @@
         </div>
         <button class="btn btn-info btn-md" type="submit">Test</button>
     </form>
-    <div id="time" class="col-sm"></div>
+    <div class="container">
+            <div id="time" class="col-sm time">
+                <!-- <img src="../static/images/bruteforce.png" alt="hacker">
+                <div class="progress">
+                    <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75"
+                        aria-valuemin="0" aria-valuemax="100" style="width: 75%"></div>
+                </div> -->
+                <div class="container">
+                    <div class="row bruteRow">
+                        <div class="bruteResult">
+                            <p class="resultHead">Years</p>
+                            <p>255</p>
+                        </div>
+                        <div class="bruteResult">
+                            <p class="resultHead">Months</p>
+                            <p>3</p>
+                        </div>
+                        <div class="bruteResult">
+                            <p class="resultHead">Weeks</p>
+                            <p>2</p>
+                        </div>
+                        <div class="bruteResult">
+                            <p class="resultHead">Days</p>
+                            <p>1</p>
+                        </div>
+                        <div class="bruteResult">
+                            <p class="resultHead">Hours</p>
+                            <p>12</p>
+                        </div>
+                        <div class="bruteResult">
+                            <p class="resultHead">Mintues</p>
+                            <p>30</p>
+                        </div>
+                        <div class="bruteResult">
+                            <p class="resultHead">Seconds</p>
+                            <p>40</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="GaugeMeter" id="GaugeMeter_1"></div>
+        </div>
+    </div>
     <div class="container">
         <div class="row">
             <div id="dictionary" class="col-sm">
@@ -123,7 +164,6 @@
                 $("#data-info").empty();
 
                 console.log(data);
-                console.log(Object.keys(data[1]).length)
                 if (Object.keys(data[1]).length) {
                     data[1].matches.forEach(e => {
                         m += ", " + e + " ";
@@ -137,7 +177,6 @@
                         comArray.push(e);
                     });   
                 }
-                console.log(c.length)
                 $("#time").empty().append(
                     data[0].years +" Year " + data[0].months + " Months "+ data[0].weeks + " Weeks " + data[0].days + " Days " + data[0].hours + " Hours " + data[0].mintues + " Mintues " + data[0].seconds + " Seconds ");
             
@@ -159,7 +198,7 @@
                         }
                     });
                     for (let i = 0; i < dictArray.length; i++) {
-                        $("#dictionary").append("<p>"+ dictArray[i] +"</p>")
+                        $("#dictionary").append("<p class='w'>"+ dictArray[i] +"</p>")
                     }
                 }else {
                     var ctx = document.getElementById('dict-chart').getContext('2d');
@@ -198,7 +237,7 @@
                         }
                     });
                     for (let i = 0; i < comArray.length; i++) {
-                        $("#common").append("<p>" + comArray[i] + "</p>")
+                        $("#common").append("<p class='w'>" + comArray[i] + "</p>")
                     }
                 }else {
                     var ctx1 = document.getElementById('common-chart').getContext('2d');
@@ -221,7 +260,6 @@
 
                 let passlen = $("#password").val().length;
                 let pass = $("#password").val();
-                console.log("fullname= " + data[3].fullname.length);
 
                 if (Object.keys(data[3]).length) {
                     var ctx2 = document.getElementById('info-chart').getContext('2d');

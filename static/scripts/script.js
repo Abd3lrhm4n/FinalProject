@@ -72,6 +72,20 @@ $('document').ready(function(){
         $(".userInfo").toggle("slow", "linear");
     });
 
+    $(".GaugeMeter").gaugeMeter({
+        percent : 80,
+        text : "Bruteforce Time",
+        text_size : 0.22,
+        //append : "Years",
+        prepend: null,
+        size : "500",
+        width : 15,
+        style : "Arch",
+        theme : "Red-Gold-Green",
+        animate_gauge_colors : false,
+        animate_text_colors : false
+    });
+
 });
 
 
