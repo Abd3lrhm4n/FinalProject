@@ -87,36 +87,36 @@
                     <div class="row bruteRow">
                         <div class="bruteResult">
                             <p class="resultHead">Years</p>
-                            <p>255</p>
+                            <p></p>
                         </div>
                         <div class="bruteResult">
                             <p class="resultHead">Months</p>
-                            <p>3</p>
+                            <p></p>
                         </div>
                         <div class="bruteResult">
                             <p class="resultHead">Weeks</p>
-                            <p>2</p>
+                            <p></p>
                         </div>
                         <div class="bruteResult">
                             <p class="resultHead">Days</p>
-                            <p>1</p>
+                            <p></p>
                         </div>
                         <div class="bruteResult">
                             <p class="resultHead">Hours</p>
-                            <p>12</p>
+                            <p></p>
                         </div>
                         <div class="bruteResult">
                             <p class="resultHead">Mintues</p>
-                            <p>30</p>
+                            <p></p>
                         </div>
                         <div class="bruteResult">
                             <p class="resultHead">Seconds</p>
-                            <p>40</p>
+                            <p></p>
                         </div>
                     </div>
                 </div>
                 <div class="GaugeMeter" id="GaugeMeter_1"></div>
-        </div>
+            </div>
     </div>
     <div class="container">
         <div class="row">
@@ -162,6 +162,8 @@
                 $("#dictionary p").remove();
                 $("#common p").remove();
                 $("#data-info").empty();
+                $(".bruteResult p:nth-child(2)").empty();
+                $(".time").css("display", "none");
 
                 console.log(data);
                 if (Object.keys(data[1]).length) {
@@ -177,9 +179,59 @@
                         comArray.push(e);
                     });   
                 }
-                $("#time").empty().append(
-                    data[0].years +" Year " + data[0].months + " Months "+ data[0].weeks + " Weeks " + data[0].days + " Days " + data[0].hours + " Hours " + data[0].mintues + " Mintues " + data[0].seconds + " Seconds ");
-            
+
+                let timeArr = [];
+
+                // $("#time").empty().append(
+                //     data[0].years +" Year " + data[0].months + " Months "+ data[0].weeks + " Weeks " + data[0].days + " Days " + data[0].hours + " Hours " + data[0].mintues + " Mintues " + data[0].seconds + " Seconds ");
+
+                for (var key in data[0]) {
+                    if (data[0].hasOwnProperty(key)) {
+                        
+                        if (key == 'years') {
+                            timeArr[0] = data[0][key];
+                        }
+                        else if (key == 'months') {
+                            timeArr[1] = data[0][key];
+                        }
+                        else if (key == 'weeks') {
+                            timeArr[2] = data[0][key];
+                        }
+                        else if (key == 'days') {
+                            timeArr[3] = data[0][key];
+                        }
+                        else if (key == 'hours') {
+                            timeArr[4] = data[0][key];
+                        }
+                        else if (key == 'mintues') {
+                            timeArr[5] = data[0][key];
+                        }
+                        else {
+                            timeArr[6] = data[0][key];
+                        }
+
+                        timeArr.push(data[0][key]);
+                        console.log(key + '->' + data[0][key]);
+                    }
+                }
+                $(".time").css("display", "block");
+                $(".GaugeMeter").gaugeMeter({
+                    percent: 80,
+                    text: "Bruteforce Time",
+                    text_size: 0.22,
+                    //append : "Years",
+                    prepend: null,
+                    size: "500",
+                    width: 15,
+                    style: "Arch",
+                    theme: "Red-Gold-Green",
+                    animate_gauge_colors: false,
+                    animate_text_colors: false
+                });
+                for (let i = 0; i < $(".bruteResult p:nth-child(2)").length; i++) {
+                    console.log(timeArr[i]);
+                    $(".bruteResult p:nth-child(2)")[i].append(timeArr[i]);
+                }
                 if (m != "") {
                     var ctx = document.getElementById('dict-chart').getContext('2d');
                     var chart = new Chart(ctx, {

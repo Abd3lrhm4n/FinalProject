@@ -1,6 +1,7 @@
 $('document').ready(function(){
     
     $("#password").focus();
+    $(".time").css("display", "none")
 
     $("#password").on("keyup", function(){
 
