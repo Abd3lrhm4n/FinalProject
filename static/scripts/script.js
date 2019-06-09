@@ -85,6 +85,29 @@ $('document').ready(function(){
         $(".userInfo").toggle("slow", "linear");
     });
 
+    //show and hide password
+    let showen = false;
+
+    $("#eye").on("click", () =>{
+        
+        if (showen == false) {
+            $("#password").attr('type', 'text');
+            $("#eye").css("color", "red");
+            showen = true;
+        }
+        else {
+            $("#password").attr('type', 'password');
+            $("#eye").css("color", "black");
+            showen = false;
+        }
+    });
+
+    $("#password").on("focus", function() {
+        $(".popover").show();
+    })
+    $("#password").on("focusout", () => {
+        $(".popover").hide();
+    })
 });
 
 

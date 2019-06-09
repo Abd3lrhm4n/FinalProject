@@ -221,3 +221,11 @@ input:checked + .slider:before {
   font-family: kaushan;
   font-weight: 700;
 }
+
+#eye {
+  color: black;
+  -webkit-transition: color 0.4s ease;
+  -moz-transition: color 0.4s ease;
+  -o-transition: color 0.4s ease;
+  transition: color 0.4s ease;
+}

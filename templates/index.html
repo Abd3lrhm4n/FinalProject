@@ -2,9 +2,27 @@
 
 {% block main %}
     <form method="POST" action="/">
-        <div class="form-group password">
-            <input class="form-control" id="password" type="password" name="password" placeholder="Password" />
+        <div class="my-1">
+            <div class="input-group">
+                <input type="password" name="password" class="form-control" id="password" placeholder="password">
+                <div class="input-group-prepend">
+                    <div class="input-group-text"><a id="eye"><i class="far fa-eye"></i></a></div>
+                </div>
+            </div>
         </div>
+        <!-- <div class="form-group password my-1">
+            <input class="form-control" id="password" type="password" name="password" placeholder="Password" />
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <div class="input-group-text">@</div>
+                </div>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">@</div>
+                    </div>
+                </div>
+            </div>
+        </div> -->
         <!-- <div class="form-group">
             <ul class="focus">
                 <li class="invalid">Must be at least 8 characters long.</li>
