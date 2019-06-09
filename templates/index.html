@@ -139,9 +139,11 @@
     <div class="container">
         <div class="row">
             <div id="dictionary" class="col-sm">
+                <h3 class="result-head">English Dictionary</h3>
                 <canvas id="dict-chart"></canvas>
             </div>
             <div id="common" class="col-sm">
+                <h3 class="result-head">Common Password</h3>
                 <canvas id="common-chart"></canvas>
             </div>
         </div>
@@ -149,6 +151,7 @@
     <div class="contianer">
         <div class="row">
             <div id="info" class="col-sm">
+                <h3 class="result-head">Personal Info</h3>
                 <canvas id="info-chart"></canvas>
             </div>
             <div id="data-info" class="col-sm"></div>
@@ -182,8 +185,24 @@
                 $("#data-info").empty();
                 $(".bruteResult p:nth-child(2)").empty();
                 $(".time").css("display", "none");
-                $("#dict-chart").empty();
-                $("#common-chart").empty();
+
+                $("#dictionary").empty();
+                $("#common").empty();
+                $("#info").empty();
+
+                $(".result-head").css("display", "none");
+                $("#dictionary").append('<h3 class="result-head">English Dictionary</h3>');
+                $("#dictionary").append('<canvas id="dict-chart"></canvas>');
+
+                $("#common").append('<h3 class="result-head">Common Passwords</h3>');
+                $("#common").append('<canvas id="common-chart"></canvas>');
+
+                $("#info").append('<h3 class="result-head">Personal Info</h3>');
+                $("#info").append('<canvas id="info-chart"></canvas>');
+
+                $("#dictionary").hide();
+                $("#common").hide();
+                $("#info").hide();
 
                 console.log(data);
                 if (Object.keys(data[1]).length) {
@@ -269,9 +288,13 @@
                             }]
                         }
                     });
+                    $("#dictionary .result-head").css("display", "block");
+
                     for (let i = 0; i < dictArray.length; i++) {
                         $("#dictionary").append("<p class='w'>"+ dictArray[i] +"</p>")
                     }
+
+                    $("#dictionary").show();
                 }
                 
                 if ($(".switch input[name=common]").is(":checked")) {
@@ -291,9 +314,14 @@
                             }]
                         }
                     });
+
+                    $("#common .result-head").css("display", "block");
+
                     for (let i = 0; i < comArray.length; i++) {
                         $("#common").append("<p class='w'>" + comArray[i] + "</p>")
                     }
+
+                    $("#common").show();
                 }
 
                 let passlen = $("#password").val().length;
@@ -323,6 +351,9 @@
                             }]
                         }
                     });
+
+                    $("#info .result-head").css("display", "block");
+
                     $("#data-info").append(
                         "<p class='infoWords'> <span> Full Name </span>" + data[3].fullname + "</p>" +
                         "<p class='infoWords'> <span> Pet Name </span>" + data[3].petname + "</p>" +
@@ -331,6 +362,7 @@
                         "<p class='infoWords'> <span> Favorite Team </span>" + data[3].team + "</p>" +
                         "<p class='infoWords'> <span> Birthday </span>" + data[3].birthday + "</p>"
                     )
+                    $("#info").show();  
                 }
 
                 
