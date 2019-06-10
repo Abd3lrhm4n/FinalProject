@@ -246,10 +246,13 @@ input:checked + .slider:before {
 
 .key {
   padding-right: 0;
+  font-family: kaushan;
+  font-weight: 700;
 }
 
 .value {
   padding-left: 0;
+  font-weight: 500;
 }
 
 .table th, .table td {
