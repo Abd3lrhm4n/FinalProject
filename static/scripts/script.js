@@ -2,6 +2,7 @@ $('document').ready(function(){
     
     $("#password").focus();
     $(".time").css("display", "none");
+    $("#data-info").hide();
 
     //$('#password').togglePassword();
 

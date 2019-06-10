@@ -162,7 +162,7 @@
                                 <p class="fullname">Full Name</p>
                             </td>
                             <td class="value">
-                                <p class="fullname">abdo</p>
+                                <p class="fullname"></p>
                             </td>
                         </tr>
 
@@ -171,7 +171,7 @@
                                 <p class="petname">Pet Name</p>
                             </td>
                             <td class="value">
-                                <p class="petname">ninju</p>
+                                <p class="petname"></p>
                             </td>
                         </tr>
 
@@ -180,7 +180,7 @@
                                 <p class="lovename">Love Name</p>
                             </td>
                             <td class="value">
-                                <p class="lovename">lal</p>
+                                <p class="lovename"></p>
                             </td>
                         </tr>
 
@@ -189,7 +189,7 @@
                                 <p class="sport">Favorite Sport</p>
                             </td>
                             <td class="value">
-                                <p class="sport">sco</p>
+                                <p class="sport"></p>
                             </td>
                         </tr>
 
@@ -198,7 +198,7 @@
                                 <p class="team">Favorite Team</p>
                             </td>
                             <td class="value">
-                                <p class="team">chelsea</p>
+                                <p class="team"></p>
                             </td>
                         </tr>
 
@@ -207,7 +207,7 @@
                                 <p class="birthday">Birthday</p>
                             </td>
                             <td class="value">
-                                <p class="birthday">3231</p>
+                                <p class="birthday"></p>
                             </td>
                         </tr>
                     </tbody>
@@ -241,9 +241,11 @@
 
                 $("#dictionary p").remove();
                 $("#common p").remove();
-                // $("#data-info").empty();
                 $(".bruteResult p:nth-child(2)").empty();
                 $(".time").css("display", "none");
+
+                $("#data-info").hide();
+                $(".value p").empty();
 
                 $("#dictionary").empty();
                 $("#common").empty();
@@ -413,15 +415,16 @@
 
                     $("#info .result-head").css("display", "block");
 
-                    // $("#data-info").append(
-                    //     "<p class='infoWords'> <span> Full Name </span>" + data[3].fullname + "</p>" +
-                    //     "<p class='infoWords'> <span> Pet Name </span>" + data[3].petname + "</p>" +
-                    //     "<p class='infoWords'> <span> Love Name </span>" + data[3].lovename + "</p>" +
-                    //     "<p class='infoWords'> <span> Favortie Sport </span>" + data[3].sport + "</p>" +
-                    //     "<p class='infoWords'> <span> Favorite Team </span>" + data[3].team + "</p>" +
-                    //     "<p class='infoWords'> <span> Birthday </span>" + data[3].birthday + "</p>"
-                    // )
-                    $("#info").show();  
+                    $(".value .fullname").append(data[3].fullname.length > 0 ? data[3].fullname : "NULL");
+                    $(".value .petname").append(data[3].petname.length > 0 ? data[3].petname : "NULL");
+                    $(".value .lovename").append(data[3].lovename.length > 0 ? data[3].lovename : "NULL");
+                    $(".value .sport").append(data[3].sport.length > 0 ? data[3].sport : "NULL");
+                    $(".value .team").append(data[3].team.length > 0 ? data[3].team : "NULL");
+                    $(".value .birthday").append(data[3].birthday.length > 0 ? data[3].birthday : "NULL");
+
+
+                    $("#info").show();
+                    $("#data-info").show();  
                 }
 
                 
