@@ -291,3 +291,7 @@ input:checked + .slider:before {
 .birthday {
   background-color: rgb(120, 130, 142);
 }
+
+.row canvas {
+  margin-bottom: 10px;
+}
