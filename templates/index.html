@@ -345,7 +345,7 @@
                                 label: 'My First dataset',
                                 backgroundColor: ['rgb(255, 99, 132)', 'rgb(10, 100, 132)'],
                                 borderColor: 'rgb(10, 100, 132)',
-                                data: [data[1].percentage, 100 - data[1].percentage]
+                                data: [Math.round(data[1].percentage), Math.round(100 - data[1].percentage)]
                             }]
                         }
                     });
@@ -371,7 +371,7 @@
                                 label: 'My First dataset',
                                 backgroundColor: ['rgb(255, 99, 132)', 'rgb(10, 100, 132)'],
                                 borderColor: 'rgb(10, 100, 132)',
-                                data: [data[2].percentage, 100 - data[2].percentage]
+                                data: [Math.round(data[2].percentage), Math.round(100 - data[2].percentage)]
                             }]
                         }
                     });
@@ -389,6 +389,14 @@
                 let pass = $("#password").val();
 
                 if (Object.keys(data[3]).length) {
+
+                    fnamePerc = data[3].fullname.length / passlen * 100;
+                    pnamePerc = data[3].petname.length / passlen * 100;
+                    sportPerc = data[3].sport.length / passlen * 100;
+                    teamPerc = data[3].team.length / passlen * 100;
+                    birthdayPerc = data[3].birthday.length / passlen * 100;
+                    lnamePerc = data[3].lovename.length / passlen * 100;
+
                     var ctx2 = document.getElementById('info-chart').getContext('2d');
                     var chart = new Chart(ctx2, {
                         // The type of chart we want to create
@@ -401,13 +409,13 @@
                                 label: 'My First dataset',
                                 backgroundColor: ['rgb(255, 99, 132)', 'rgb(102, 190, 12)', 'rgb(10, 155, 12)', 'rgb(105, 150, 152)', 'rgb(103, 100, 130)', 'rgb(120, 130, 142)', 'rgb(10, 100, 132)'],
                                 borderColor: 'rgb(10, 100, 132)',
-                                data: [data[3].fullname.length / passlen * 100, 
-                                data[3].petname.length / passlen * 100,
-                                data[3].lovename.length / passlen * 100,
-                                data[3].sport.length / passlen  * 100,
-                                data[3].team.length / passlen * 100,
-                                data[3].birthday.length / passlen * 100,
-                                data[3].fullname.length + data[3].petname.length + data[3].lovename.length + data[3].sport.length + data[3].team.length + data[3].birthday.length - 100
+                                data: [ Math.round(fnamePerc), 
+                                Math.round(pnamePerc),
+                                Math.round(lnamePerc),
+                                Math.round(sportPerc),
+                                Math.round(teamPerc),
+                                Math.round(birthdayPerc),
+                                Math.round(100 - (fnamePerc + pnamePerc + lnamePerc + sportPerc + teamPerc + sportPerc))
                             ]
                             }]
                         }
