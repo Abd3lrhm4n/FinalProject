@@ -170,6 +170,7 @@ input:checked + .slider:before {
 
 .GaugeMeter span {
   font-size: 38px !important;
+  font-family: kaushan !important;
 }
 
 .GaugeMeter SPAN,
@@ -233,4 +234,57 @@ input:checked + .slider:before {
 .result-head {
   font-family: kaushan;
   display: none;
+}
+
+.key p {
+  border-radius: 50px 0 0 50px;
+}
+
+.value p {
+  border-radius: 0 50px 50px 0;
+}
+
+.key {
+  padding-right: 0;
+}
+
+.value {
+  padding-left: 0;
+}
+
+.table th, .table td {
+  padding: 0 !important;
+}
+
+#data-info {
+  position: relative;
+}
+
+.table {
+  position: absolute;
+  bottom: -10px;
+}
+
+.fullname {
+  background-color: rgb(255, 99, 132);
+}
+
+.petname {
+  background-color: rgb(102, 190, 12);
+}
+
+.lovename {
+  background-color: rgb(10, 155, 12);
+}
+
+.sport {
+  background-color: rgb(105, 150, 152);
+}
+
+.team {
+  background-color: rgb(103, 100, 130);
+}
+
+.birthday {
+  background-color: rgb(120, 130, 142);
 }

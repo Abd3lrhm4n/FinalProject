@@ -154,7 +154,66 @@
                 <h3 class="result-head">Personal Info</h3>
                 <canvas id="info-chart"></canvas>
             </div>
-            <div id="data-info" class="col-sm"></div>
+            <div id="data-info" class="col-sm">
+                <table class="table table-borderless">
+                    <tbody>
+                        <tr>
+                            <td class="key">
+                                <p class="fullname">Full Name</p>
+                            </td>
+                            <td class="value">
+                                <p class="fullname">abdo</p>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td class="key">
+                                <p class="petname">Pet Name</p>
+                            </td>
+                            <td class="value">
+                                <p class="petname">ninju</p>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td class="key">
+                                <p class="lovename">Love Name</p>
+                            </td>
+                            <td class="value">
+                                <p class="lovename">lal</p>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td class="key">
+                                <p class="sport">Favorite Sport</p>
+                            </td>
+                            <td class="value">
+                                <p class="sport">sco</p>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td class="key">
+                                <p class="team">Favorite Team</p>
+                            </td>
+                            <td class="value">
+                                <p class="team">chelsea</p>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td class="key">
+                                <p class="birthday">Birthday</p>
+                            </td>
+                            <td class="value">
+                                <p class="birthday">3231</p>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
         </div>
     </div>
     <script src="../static/scripts/script.js"></script>
@@ -182,7 +241,7 @@
 
                 $("#dictionary p").remove();
                 $("#common p").remove();
-                $("#data-info").empty();
+                // $("#data-info").empty();
                 $(".bruteResult p:nth-child(2)").empty();
                 $(".time").css("display", "none");
 
@@ -338,7 +397,7 @@
                             labels: ['Full Name', 'Pet Name', 'Love Name', 'Favorite Sport', 'Favorite Team', 'Birthday', 'total'],
                             datasets: [{
                                 label: 'My First dataset',
-                                backgroundColor: ['rgb(255, 99, 132)', 'rgb(102, 190, 12)', 'rgb(10, 155, 12)', 'rgb(105, 150, 152)', 'rgb(103, 100, 130)', 'rgb(10, 100, 132)'],
+                                backgroundColor: ['rgb(255, 99, 132)', 'rgb(102, 190, 12)', 'rgb(10, 155, 12)', 'rgb(105, 150, 152)', 'rgb(103, 100, 130)', 'rgb(120, 130, 142)', 'rgb(10, 100, 132)'],
                                 borderColor: 'rgb(10, 100, 132)',
                                 data: [data[3].fullname.length / passlen * 100, 
                                 data[3].petname.length / passlen * 100,
@@ -354,14 +413,14 @@
 
                     $("#info .result-head").css("display", "block");
 
-                    $("#data-info").append(
-                        "<p class='infoWords'> <span> Full Name </span>" + data[3].fullname + "</p>" +
-                        "<p class='infoWords'> <span> Pet Name </span>" + data[3].petname + "</p>" +
-                        "<p class='infoWords'> <span> Love Name </span>" + data[3].lovename + "</p>" +
-                        "<p class='infoWords'> <span> Favortie Sport </span>" + data[3].sport + "</p>" +
-                        "<p class='infoWords'> <span> Favorite Team </span>" + data[3].team + "</p>" +
-                        "<p class='infoWords'> <span> Birthday </span>" + data[3].birthday + "</p>"
-                    )
+                    // $("#data-info").append(
+                    //     "<p class='infoWords'> <span> Full Name </span>" + data[3].fullname + "</p>" +
+                    //     "<p class='infoWords'> <span> Pet Name </span>" + data[3].petname + "</p>" +
+                    //     "<p class='infoWords'> <span> Love Name </span>" + data[3].lovename + "</p>" +
+                    //     "<p class='infoWords'> <span> Favortie Sport </span>" + data[3].sport + "</p>" +
+                    //     "<p class='infoWords'> <span> Favorite Team </span>" + data[3].team + "</p>" +
+                    //     "<p class='infoWords'> <span> Birthday </span>" + data[3].birthday + "</p>"
+                    // )
                     $("#info").show();  
                 }
 
