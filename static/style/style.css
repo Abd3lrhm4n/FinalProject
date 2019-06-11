@@ -298,3 +298,8 @@ input:checked + .slider:before {
 .row canvas {
   margin-bottom: 10px;
 }
+
+nav a {
+  font-family: 'Satisfy', cursive;
+  color: #007cc2;
+}
