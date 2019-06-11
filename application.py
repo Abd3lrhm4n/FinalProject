@@ -42,7 +42,7 @@ def index():
         dictionary = dict()
         time = ""
 
-        if request.form.get("password"):
+        if request.form.get("password") and len(request.form.get("password") > 0):
 
             password = request.form.get("password")
 
@@ -62,52 +62,64 @@ def index():
 
             if request.form.get("info"):
                     
+                # check the password with fullname
                 if request.form.get("fullname"):
 
                     userInfo["fullname"] = UserInfoAnalysis(request.form.get("fullname"), password)
 
                 else:
 
+                    # set to empty if no character found
                     userInfo["fullname"] = ""
 
+                # check the password with petname
                 if request.form.get("petname"):
 
                     userInfo["petname"] = UserInfoAnalysis(request.form.get("petname"), password)
 
                 else:
 
+                    # set to empty if no character found
                     userInfo["petname"] = ""
 
+                # check the password with birthday
                 if request.form.get("birthday"):
 
                     userInfo["birthday"] = UserInfoAnalysis(request.form.get("birthday"), password)
 
                 else:
 
+                    # set to empty if no character found
                     userInfo["birthday"] = ""
 
+                # check the password with lovename
                 if request.form.get("lovename"):
 
                     userInfo["lovename"] = UserInfoAnalysis(request.form.get("lovename"), password)
 
                 else:
 
+                    # set to empty if no character found
                     userInfo["lovename"] = ""
     
+                # check the password with sport
                 if request.form.get("sport"):
 
                     userInfo["sport"] = UserInfoAnalysis(request.form.get("sport"), password)
 
                 else:
 
+                    # set to empty if no character found
                     userInfo["sport"] = ""
 
+                # check the password with favorite team
                 if request.form.get("team"):
 
                     userInfo["team"] = UserInfoAnalysis(request.form.get("team"), password)
  
                 else:
 
+                    # set to empty if no character found
                     userInfo["team"] = ""
 
             return jsonify(time, dictionary, common, userInfo)
