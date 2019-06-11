@@ -6,6 +6,10 @@
   src: url(../fonts/KaushanScript-Regular.ttf);
   font-family: kaushan;
 }
+@font-face{
+  src: url(../fonts/Satisfy-Regular.ttf);
+  font-family: satisfy;
+}
 
 nav .navbar-brand
 {
@@ -300,6 +304,6 @@ input:checked + .slider:before {
 }
 
 nav a {
-  font-family: 'Satisfy', cursive;
+  font-family: 'satisfy';
   color: #007cc2;
 }

@@ -4,7 +4,7 @@
     <form method="POST" action="/">
         <div class="my-1">
             <div class="input-group">
-                <input type="password" name="password" class="form-control" id="password" placeholder="password" required>
+                <input type="password" name="password" class="form-control" id="password" placeholder="password" maxlength="20" required>
                 <div class="input-group-prepend">
                     <div class="input-group-text"><a id="eye"><i class="far fa-eye"></i></a></div>
                 </div>
@@ -233,12 +233,13 @@
             var posting = $.post(url, $(this).serialize());
 
             posting.done(function(data){
-                let m = "";
-                let c = "";
+
                 let u = "";
+
                 let dictArray = [];
                 let comArray = [];
 
+                // empty and reset value in the began of request
                 $("#dictionary p").remove();
                 $("#common p").remove();
                 $(".bruteResult p:nth-child(2)").empty();
@@ -266,25 +267,25 @@
                 $("#info").hide();
 
                 console.log(data);
+                // append the result of dictionary to dictArry
                 if (Object.keys(data[1]).length) {
                     data[1].matches.forEach(e => {
-                        m += ", " + e + " ";
                         dictArray.push(e);
                     });
                 }
-                console.log("m" + m.length);
+
+                //console.log("m" + m.length);
+                // append the result of common password to comArray
                 if (Object.keys(data[2]).length) {
                     data[2].matches.forEach(e => {
-                        c += ", " + e + " ";
                         comArray.push(e);
                     });   
                 }
 
+                // array to arrange the bruteforce time
                 let timeArr = [];
 
-                // $("#time").empty().append(
-                //     data[0].years +" Year " + data[0].months + " Months "+ data[0].weeks + " Weeks " + data[0].days + " Days " + data[0].hours + " Hours " + data[0].mintues + " Mintues " + data[0].seconds + " Seconds ");
-
+                // append values to timeArr
                 for (var key in data[0]) {
                     if (data[0].hasOwnProperty(key)) {
                         
@@ -311,10 +312,13 @@
                         }
 
                         timeArr.push(data[0][key]);
-                        console.log(key + '->' + data[0][key]);
+                        // console.log(key + '->' + data[0][key]);
                     }
                 }
+                // show time block
                 $(".time").css("display", "block");
+
+                // draw meter
                 $(".GaugeMeter").gaugeMeter({
                     percent: 80,
                     text: "Bruteforce Time",
@@ -328,10 +332,14 @@
                     animate_gauge_colors: false,
                     animate_text_colors: false
                 });
+
+                // append timeArr values to DOM
                 for (let i = 0; i < $(".bruteResult p:nth-child(2)").length; i++) {
-                    console.log(timeArr[i]);
+                    // console.log(timeArr[i]);
                     $(".bruteResult p:nth-child(2)")[i].append(timeArr[i]);
                 }
+
+                // if dictionary switch checked show the english dictionary result
                 if ($(".switch input[name=dictionary]").is(":checked")) {
                     var ctx = document.getElementById('dict-chart').getContext('2d');
                     var chart = new Chart(ctx, {
@@ -358,6 +366,7 @@
                     $("#dictionary").show();
                 }
                 
+                // if common passwords switch checked show the result
                 if ($(".switch input[name=common]").is(":checked")) {
                     var ctx1 = document.getElementById('common-chart').getContext('2d');
                     var chart = new Chart(ctx1, {
