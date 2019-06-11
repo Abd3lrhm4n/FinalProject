@@ -4,7 +4,7 @@ That project is tool so the user can analysis his password and know how stronge 
 
 # Usage
 
-1 - Enter his password
+## 1 - Enter his password
 2 - check if he want to check his password in English dictionary or Common Password or Both
 3 - if he want to check with his personal info switch Personal Info and fill his data
 
